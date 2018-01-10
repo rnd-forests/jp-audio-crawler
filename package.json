@@ -6,7 +6,8 @@
   "dependencies": {
     "download": "^6.2.5",
     "md5": "^2.2.1",
-    "puppeteer": "^0.13.0"
+    "puppeteer": "^0.13.0",
+    "uniqid": "^4.1.1"
   },
   "devDependencies": {},
   "author": "Vinh Nguyen",

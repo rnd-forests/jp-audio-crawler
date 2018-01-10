@@ -1,47 +1,55 @@
 'use strict';
 
 const fs = require('fs');
-const md5 = require('md5');
+const uniqid = require('uniqid');
 const download = require('download');
 const puppeteer = require('puppeteer');
 
-async function getSpeech(text) {
-    let audio = "";
+function isAborted(request) {
+    const excludedUrls = [
+        'http://www.google-analytics.com/ga.js',
+        'https://www.google-analytics.com/ga.js',
+    ];
+    const excludedResources = ['image', 'stylesheet', 'font', 'media'];
 
-    const browser = await puppeteer.launch({
-        headless: true,
-        timeout: 60000
-    });
+    return excludedResources.includes(request.resourceType) || excludedUrls.includes(request.url);
+}
+
+async function getSpeech(text) {
+    let audio = '';
+    const baseUrl = 'http://www.gavo.t.u-tokyo.ac.jp/ojad/phrasing/index';
+
+    const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
 
-    // Track the requests and find the request URL to the audio file
-    page.on('request', (request) => {
-        if (request.url.endsWith('.wav')) {
-            audio = request.url;
+    await page.setRequestInterception(true);
+
+    page.on('request', request => {
+        if (isAborted(request)) {
+            request.abort();
+        } else {
+            if (request.url.endsWith('.wav')) {
+                audio = request.url;
+            }
+            request.continue();
         }
     });
 
-    // Go to the destination page
-    await page.goto('http://www.gavo.t.u-tokyo.ac.jp/ojad/phrasing/index');
+    await page.goto(baseUrl, {waitUntil: 'networkidle2'});
 
-    // Fill the desired Japanese text into the textarea
     await page.type('textarea[name="data[Phrasing][text]"]', text);
 
-    // Click on execution button
     const executionBtnSelector = 'input[value="実行"]';
     await page.click(executionBtnSelector);
 
-    // Synthesize the audio
     const createBtnSelector = 'input[value="作成"]';
     await page.waitForSelector(createBtnSelector, {visible: true});
     await page.click(createBtnSelector);
 
-    // Play the audio in order to get the URL
     const playBtnSelector = 'input[value="再生"]';
     await page.waitForSelector(playBtnSelector, {visible: true});
     await page.click(playBtnSelector);
 
-    // We're done
     await browser.close();
 
     return audio;
@@ -49,7 +57,7 @@ async function getSpeech(text) {
 
 function downloadSpeech(text, audioDir='audio') {
     getSpeech(text).then(audio => {
-        let target = audioDir + '/' + md5(text) + '.wav';
+        let target = audioDir + '/' + uniqid() + '.wav';
         download(audio).then(stream => {
             fs.writeFileSync(target, stream);
         });
