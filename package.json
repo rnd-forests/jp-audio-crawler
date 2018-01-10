@@ -1,0 +1,15 @@
+{
+  "name": "imtranslator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chromeless": "^1.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinh Nguyen",
+  "license": "MIT"
+}
