@@ -8,7 +8,10 @@ const puppeteer = require('puppeteer');
 async function getSpeech(text) {
     let audio = "";
 
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({
+        headless: true,
+        timeout: 60000
+    });
     const page = await browser.newPage();
 
     // Track the requests and find the request URL to the audio file
