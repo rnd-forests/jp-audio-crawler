@@ -7,7 +7,6 @@ const puppeteer = require('puppeteer');
 
 async function getSpeech(text) {
     let audio = "";
-    let promises = [];
 
     const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
