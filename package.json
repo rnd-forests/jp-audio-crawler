@@ -1,15 +1,14 @@
 {
-  "name": "imtranslator",
+  "name": "jp-audio-crawler",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "chromeless": "^1.4.0"
+    "download": "^6.2.5",
+    "md5": "^2.2.1",
+    "puppeteer": "^0.13.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Vinh Nguyen",
   "license": "MIT"
 }
