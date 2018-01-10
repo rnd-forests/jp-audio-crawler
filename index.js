@@ -10,7 +10,7 @@ function isAborted(request) {
         'http://www.google-analytics.com/ga.js',
         'https://www.google-analytics.com/ga.js',
     ];
-    const excludedResources = ['image', 'stylesheet', 'font', 'media'];
+    const excludedResources = ['image', 'stylesheet', 'font'];
 
     return excludedResources.includes(request.resourceType) || excludedUrls.includes(request.url);
 }
@@ -57,6 +57,7 @@ async function getSpeech(text) {
 
 function downloadSpeech(text, audioDir='audio') {
     getSpeech(text).then(audio => {
+        console.log(audio);
         let target = audioDir + '/' + uniqid() + '.wav';
         download(audio).then(stream => {
             fs.writeFileSync(target, stream);
