@@ -35,7 +35,7 @@ async function getSpeech(text) {
         }
     });
 
-    await page.goto(baseUrl, {waitUntil: 'networkidle2'});
+    await page.goto(baseUrl);
 
     await page.type('textarea[name="data[Phrasing][text]"]', text);
 
