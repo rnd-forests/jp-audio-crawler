@@ -35,11 +35,18 @@ async function getSpeech(text) {
         }
     });
 
-    await page.goto(baseUrl);
+    try {
+        await page.goto(baseUrl);
+    } catch (error) {
+        browser.close();
+    }
 
-    await page.type('textarea[name="data[Phrasing][text]"]', text);
+    const textareaSelector = 'textarea[name="data[Phrasing][text]"]';
+    await page.waitForSelector(textareaSelector, {visible: true});
+    await page.type(textareaSelector, text);
 
     const executionBtnSelector = 'input[value="実行"]';
+    await page.waitForSelector(executionBtnSelector, {visible: true});
     await page.click(executionBtnSelector);
 
     const createBtnSelector = 'input[value="作成"]';
@@ -70,7 +77,12 @@ const texts = [
     '本当だと思っている',
     '本当ではないと思っている',
     'よく知っている',
-    'よく知らない'
+    'よく知らない',
+    '小林さんは、その話を疑っているようだ',
+    '本当ではないと思っている',
+    'よく知らない',
+    '本当だと思っている',
+    'よく知っている'
 ];
 
 for (let text of texts) {
