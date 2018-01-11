@@ -23,7 +23,6 @@ async function getSpeech(text) {
     const page = await browser.newPage();
 
     await page.setRequestInterception(true);
-
     page.on('request', request => {
         if (isAborted(request)) {
             request.abort();
@@ -41,21 +40,21 @@ async function getSpeech(text) {
         browser.close();
     }
 
-    const textareaSelector = 'textarea[name="data[Phrasing][text]"]';
-    await page.waitForSelector(textareaSelector, {visible: true});
-    await page.type(textareaSelector, text);
+    const textarea = 'textarea[name="data[Phrasing][text]"]';
+    await page.waitForSelector(textarea, {visible: true});
+    await page.type(textarea, text);
 
-    const executionBtnSelector = 'input[value="実行"]';
-    await page.waitForSelector(executionBtnSelector, {visible: true});
-    await page.click(executionBtnSelector);
+    const executionButton = 'input[value="実行"]';
+    await page.waitForSelector(executionButton, {visible: true});
+    await page.click(executionButton);
 
-    const createBtnSelector = 'input[value="作成"]';
-    await page.waitForSelector(createBtnSelector, {visible: true});
-    await page.click(createBtnSelector);
+    const synthesisButton = 'input[value="作成"]';
+    await page.waitForSelector(synthesisButton, {visible: true});
+    await page.click(synthesisButton);
 
-    const playBtnSelector = 'input[value="再生"]';
-    await page.waitForSelector(playBtnSelector, {visible: true});
-    await page.click(playBtnSelector);
+    const playbackButton = 'input[value="再生"]';
+    await page.waitForSelector(playbackButton, {visible: true});
+    await page.click(playbackButton);
 
     await browser.close();
 
