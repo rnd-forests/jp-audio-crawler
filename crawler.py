@@ -1,8 +1,6 @@
 import re
-import os
 import json
 from selenium import webdriver
-from collections import OrderedDict
 from order_dict import DefaultListOrderedDict
 
 
@@ -11,7 +9,6 @@ def strip_ordinal(text):
 
 
 def extract_test(url):
-    test = OrderedDict()
     questions = []
     solutions = submit_test(url)
 
@@ -35,11 +32,12 @@ def extract_test(url):
                     question['choices'].append({'choice': choice_text, 'valid': choice_text == solution[1]})
             questions.append(question)
 
-    test['name'] = browser.find_element_by_class_name('title-baihoc').text
-    test['questions'] = questions
+    test_name = browser.find_element_by_class_name('title-baihoc').text
 
     browser.close()
-    return test
+
+    with open('text/' + test_name + '.json', 'w') as fp:
+        json.dump(questions, fp)
 
 
 def submit_test(url):
@@ -69,7 +67,37 @@ def submit_test(url):
     return solution
 
 
-test = extract_test("http://jlpt4u.info/test/create_test/53")
+urls = [
+    'http://jlpt4u.info/test/create_test/11',
+    'http://jlpt4u.info/test/create_test/18',
+    'http://jlpt4u.info/test/create_test/19',
+    'http://jlpt4u.info/test/create_test/20',
+    'http://jlpt4u.info/test/create_test/52',
+    'http://jlpt4u.info/test/create_test/53',
+    'http://jlpt4u.info/test/create_test/54',
+    'http://jlpt4u.info/test/create_test/55',
+    'http://jlpt4u.info/test/create_test/56',
+    'http://jlpt4u.info/test/create_test/23',
+    'http://jlpt4u.info/test/create_test/24',
+    'http://jlpt4u.info/test/create_test/25',
+    'http://jlpt4u.info/test/create_test/26',
+    'http://jlpt4u.info/test/create_test/27',
+    'http://jlpt4u.info/test/create_test/28',
+    'http://jlpt4u.info/test/create_test/29',
+    'http://jlpt4u.info/test/create_test/57',
+    'http://jlpt4u.info/test/create_test/58',
+    'http://jlpt4u.info/test/create_test/63',
+    'http://jlpt4u.info/test/create_test/31',
+    'http://jlpt4u.info/test/create_test/32',
+    'http://jlpt4u.info/test/create_test/33',
+    'http://jlpt4u.info/test/create_test/34',
+    'http://jlpt4u.info/test/create_test/36',
+    'http://jlpt4u.info/test/create_test/37',
+    'http://jlpt4u.info/test/create_test/61',
+    'http://jlpt4u.info/test/create_test/62',
+    'http://jlpt4u.info/test/create_test/59',
+    'http://jlpt4u.info/test/create_test/60'
+]
 
-with open('test.json', 'w') as fp:
-    json.dump(test, fp)
+for url in urls:
+    extract_test(url)
