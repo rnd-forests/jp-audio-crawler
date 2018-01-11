@@ -1,0 +1,110 @@
+{
+  "name": "問題例 N4\n|\nN4 (2005)",
+  "questions": [
+    {
+      "title": "わたしは　くだものが　すきです。",
+      "choices": [
+        {
+          "valid": false,
+          "choice": "いぬや　ねこなどが　すきです。"
+        },
+        {
+          "valid": true,
+          "choice": "りんごや　バナナなどが　すきです。"
+        },
+        {
+          "valid": false,
+          "choice": "やきゅうや　サッカーなどが　すきです。"
+        },
+        {
+          "valid": false,
+          "choice": "すしや　てんぷらなどが　すきです。"
+        }
+      ]
+    },
+    {
+      "title": "こうえんに　けいかんが　いました。",
+      "choices": [
+        {
+          "valid": true,
+          "choice": "おまわりさんが　いました。"
+        },
+        {
+          "valid": false,
+          "choice": "おくさんが　いました。"
+        },
+        {
+          "valid": false,
+          "choice": "おいしゃさんが　いました。"
+        },
+        {
+          "valid": false,
+          "choice": "おにいさんが　いました。"
+        }
+      ]
+    },
+    {
+      "title": "テーブルに　おさらを　８まい　ならべて　ください。",
+      "choices": [
+        {
+          "valid": true,
+          "choice": "おさらを　８まい　おいて　ください。"
+        },
+        {
+          "valid": false,
+          "choice": "おさらを　８まい　わたして　ください。"
+        },
+        {
+          "valid": false,
+          "choice": "おさらを　８まい　つかって　ください。"
+        },
+        {
+          "valid": false,
+          "choice": "おさらを　８まい　もって　ください。"
+        }
+      ]
+    },
+    {
+      "title": "この　しょくどうは　まずいです。",
+      "choices": [
+        {
+          "valid": true,
+          "choice": "ここの　りょうりは　おいしく　ありません。"
+        },
+        {
+          "valid": false,
+          "choice": "ここの　りょうりは　やすく　ありません。"
+        },
+        {
+          "valid": false,
+          "choice": "ここの　りょうりは　おいしいです。"
+        },
+        {
+          "valid": false,
+          "choice": "ここの　りょうりは　やすいです。"
+        }
+      ]
+    },
+    {
+      "title": "きのう　たなかさんは　しごとを　やすみましたね。なぜですか。",
+      "choices": [
+        {
+          "valid": false,
+          "choice": "たなかさんは　どんな　しごとを　やすみましたね。"
+        },
+        {
+          "valid": false,
+          "choice": "たなかさんは　どっちの　しごとを　やすみましたね。"
+        },
+        {
+          "valid": false,
+          "choice": "たなかさんは　どこで　しごとを　やすみました。"
+        },
+        {
+          "valid": true,
+          "choice": "たなかさんは　どうして　しごとを　やすみましたね。"
+        }
+      ]
+    }
+  ]
+}
